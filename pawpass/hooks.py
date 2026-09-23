@@ -256,3 +256,21 @@ app_license = "mit"
 # List of apps whose translatable strings should be excluded from this app's translations.
 # ignore_translatable_strings_from = []
 
+permission_query_conditions = {
+	"Stay Card": "pawpass.api.stay_card_permission",
+}
+
+fixtures = [
+    {
+        "dt":"SERVICE TYPE",
+        "filters":[
+            ["service_name","in",[
+                "Bath & Brush","Nail Trim","Deshedding Treatment","Overnight Boarding"
+            ]]
+        ]
+    },
+    {
+        "dt":"Role",
+        "filters":[["role_name","in","PP Front Desk","PP Attendant","PP Manager"]]
+    }
+]

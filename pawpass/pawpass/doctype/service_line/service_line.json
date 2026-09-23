@@ -35,7 +35,7 @@
    "fieldname": "rate",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "rate",
+   "label": "Rate",
    "read_only": 1
   },
   {
@@ -58,7 +58,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2026-09-22 18:44:41.758493",
+ "modified": "2026-09-23 16:09:52.331585",
  "modified_by": "Administrator",
  "module": "Pawpass",
  "name": "Service Line",

@@ -76,7 +76,7 @@
    "set_only_once": 1
   },
   {
-   "depends_on": "eval:doc.status==\"On Leave\";",
+   "depends_on": "eval:doc.status==\"On Leave\"",
    "fieldname": "notes",
    "fieldtype": "Text",
    "label": "Notes"
@@ -85,7 +85,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-09-22 16:10:32.102201",
+ "modified": "2026-09-23 11:01:46.761761",
  "modified_by": "Administrator",
  "module": "Pawpass",
  "name": "ATTENDANT",
@@ -101,6 +101,37 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "PP Front Desk",
+   "share": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "if_owner": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "PP Attendant",
+   "share": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "PP Manager",
    "share": 1,
    "write": 1
   }
