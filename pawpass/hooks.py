@@ -271,6 +271,23 @@ fixtures = [
     },
     {
         "dt":"Role",
-        "filters":[["role_name","in","PP Front Desk","PP Attendant","PP Manager"]]
+        "filters":[["name","in",["PP Front Desk","PP Attendant","PP Manager"]]]
     }
 ]
+
+after_install = "pawpass.install.after_install"
+
+doc_events = {
+    "*": {
+        "on_update": "pawpass.audit.log_change",
+        "on_submit": "pawpass.audit.log_change",
+        "on_cancel": "pawpass.audit.log_change",
+    },
+    "Stay Card":{
+        "before_print":"pawpass.pawpass.doctype.stay_card.stay_card.before_print"
+    }
+}
+
+jinja = {
+    "methods":["pawpass.jinja_methods"]
+}

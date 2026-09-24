@@ -42,3 +42,13 @@ E3: get_doc() vs get_value()
     -> In get_doc() it get all the meta data of the document
     -> In get_value() it get only the specific value we entered in the method 
     -> for Attendant controller's on_update methon we can go with get_value() it will directly get the specific value.
+
+Group H:
+frappe.call() inside validate():
+    -> In this scenario frappe.call() call the server/API method, inside the validate it must complete the task after that the next task will execute, it will check already available values, synchronous validation and throw error if needed
+    -> frappe.call() in refresh or onload the response will saved and respond it will fetching and  asynchronous work
+
+Group J:
+Difference between frappe.get_all() and before_print:
+    -> Calling frappe.get_all() directly inside a Jinja template mixes database access with presentation logic. The query is executed every time the template is rendered and can lead to unnecessary database queries, and it will bypass the permissions.
+    -> Before_print will fetch and prepare the required data in before_print() and store it on the document in precomputed_field, Jinja template then displays only the precomputed data it is safe for print format, easy for maintain and test.

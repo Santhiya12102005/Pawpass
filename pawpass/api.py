@@ -53,3 +53,8 @@ def get_upcoming_checkouts():
 #         frappe.log_error(frappe.get_traceback(),"failed")
 #         raise
 
+
+@frappe.whitelist()
+def reassign_attendant(stay_card, attendant):
+    frappe.db.set_value("Stay Card",stay_card,"assigned_attendant",attendant)
+    return "Attendant reassigned successfully"

@@ -6,7 +6,6 @@ from frappe.model.document import Document
 
 
 class ATTENDANT(Document):
-	def on_update(self):
-        frappe.rename_doc("ATTENDANT","ATT-003","ATT-004",merge=False)
-
-	
+    # def on_update(self):
+    #     frappe.rename_doc("ATTENDANT","ATT-003","ATT-004",merge=False)        
+    pass
