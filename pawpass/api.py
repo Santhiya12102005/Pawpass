@@ -58,3 +58,23 @@ def get_upcoming_checkouts():
 def reassign_attendant(stay_card, attendant):
     frappe.db.set_value("Stay Card",stay_card,"assigned_attendant",attendant)
     return "Attendant reassigned successfully"
+
+@frappe.whitelist()
+def get_stay_summary():
+    stay_card_name = frappe.form_dict.get("stay_card_name")
+
+    if not stay_card_name or not frappe.db.exists("Stay Card", stay_card_name):
+        return {"error": "404 Not found"}
+
+    doc = frappe.get_doc("Stay Card", stay_card_name)
+
+    return {
+        "name": doc.name,
+        "pet_id": doc.pet,
+        "owner_name": doc.owner_name,
+        "owner_phone": doc.owner_phone,
+        "checkin_date": doc.checkin_date,
+        "purpose": doc.purpose,
+        "assigned_attendent": doc.assigned_attendant,
+        "final_amount": doc.final_amount
+    }

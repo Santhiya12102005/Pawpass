@@ -23,16 +23,28 @@ class StayCard(Document):
         if self.purpose and self.purpose == "Boarding":
             if getdate(self.expected_checkout_date) < getdate(self.checkin_date):
                 frappe.throw("Expected Checkout Date must be after Checkin Date")
-
+        
+        self.calculate_service_amount()
+                
         # total = 0
         # for row in self.service_lines or []:
         #     total += row.line_total
         # self.services_total = total
         # self.final_amount = total
+    def calculate_service_amount(self):
+        services_total = 0
+
+        for row in self.service_lines:
+            row.line_total = (row.rate or 0) * (row.quantity or 0)
+            services_total += row.line_total
+
+        self.services_total = services_total
+        self.final_amount = services_total
+
 
     def before_submit(self):
-        if self.status != "Ready for Pickup":
-            frappe.throw("Status Must be Ready for Pickup") 
+        if self.status not in ["Ready for Pickup","Picked Up"]:
+            frappe.throw("Status Must be Ready for Pickup or Picked Up") 
 
         if not self.service_lines or len(self.service_lines)==0:
             frappe.throw("Add Atleast one Service line")
@@ -49,7 +61,7 @@ class StayCard(Document):
             invoice.stay_card = self.name
             invoice.invoice_number = self.name
             invoice.insert()
-        frappe.enqueue("pawpass.pawpass.doctype.stay_card.send_email",queue="short",timeout=300,stay_card_name=self.name,is_async=True,enqueue_after_commit=True)
+        frappe.enqueue("pawpass.pawpass.doctype.stay_card.stay_card.send_email",queue="short",timeout=300,stay_card_name=self.name,is_async=True,enqueue_after_commit=True)
 
     def on_cancel(self):
         self.status = "Cancelled"
@@ -76,7 +88,7 @@ class StayCard(Document):
         # self.save() infinity recursion call
         pass
 
-def send_email():
+def send_email(stay_card_name):
     if not frappe.db.exists("Stay Card", stay_card_name):
         return
     doc = frappe.get_doc("Stay Card", stay_card_name)
@@ -86,3 +98,4 @@ def send_email():
 
 def before_print(doc,method=None,print_settings=None):
     doc.print_summary=(f"{doc.owner_name} -"f"{doc.pet}")
+

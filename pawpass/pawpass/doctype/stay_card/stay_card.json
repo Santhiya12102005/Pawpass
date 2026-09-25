@@ -163,6 +163,7 @@
    "label": "Remarks"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "status",
    "fieldtype": "Select",
    "in_list_view": 1,
@@ -172,6 +173,7 @@
   {
    "fieldname": "print_summary",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "Print Summary"
   }
  ],
@@ -179,7 +181,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-09-24 16:03:20.280990",
+ "modified": "2026-09-25 11:58:36.199564",
  "modified_by": "Administrator",
  "module": "Pawpass",
  "name": "Stay Card",

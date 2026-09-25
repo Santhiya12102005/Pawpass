@@ -6,4 +6,6 @@ from frappe.model.document import Document
 
 
 class SERVICETYPE(Document):
-	pass
+	def validate(self):
+		if self.base_rate <= 0:
+			frappe.throw("Base Rate must be greater than 0")
